@@ -1,21 +1,10 @@
-# microsoft-copilot-porxy
+# microsoft copilot 透明代理服务器端
 
 ##### 声明：源码源自 https://github.com/jianjianai/microsoft-copilot-porxy 改写;
 
-# 这个地址很奇妙：
-- ```https://copilot.microsoft.com/c/api/chat?api-version=2&features=-%2Cncedge%2Cedgepagecontext&setflight=-%2Cncedge%2Cedgepagecontext&ncedge=1```
-## ~~这个反向代理基本上是不能够直接使用了。~~
-
-### 但是可以作为一些简易正向代理的后端使用，比如whistle。
--  将 copilot.microsoft.com/c 代理到这个部署即可
+## 部署
+### 在cf pages上部署这个服务器
+### 作为一些简易正向代理的后端使用，比如whistle。
+-  将 copilot.microsoft.com 代理到这个部署即可
 -  ![image](https://github.com/user-attachments/assets/fdfa4151-4bb7-42df-9ef1-f42c2ffc27a9)
 
-
-
-### ~~不幸的是，自24年10月起，Copilot弃用了cct认证，全面采用的CF人机验证小部件，绕过 无效域 的方法还莫如直接科学更简单；~~
-### ~~尝试更换ip，似乎也难以规避：~~
--    IP地址检查： https://jiome-ip.hf.space/
-
-## ~~Bing目前还是cct认证，姊妹篇： [https://bi1.pages.dev](https://bi1.pages.dev/chat?q=Microsoft+Copilot&FORM=hpcodx)~~
-### Bing官网也已跳转Copilot了，NewBing即将谢幕！
-![image](https://github.com/user-attachments/assets/2073028d-3901-4713-a990-9a22ae781c1c)
