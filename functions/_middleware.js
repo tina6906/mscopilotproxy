@@ -131,6 +131,25 @@ async function handleRequest(request, env,ctx) {
         if (resUrl.pathname == "/") {
           retBody = injectionHtmlToHead(retBody, CopilotInjection);
         }
+
+        // 修改 CSP 头部
+const cspHeader = resHeaders.get("Content-Security-Policy");
+if (cspHeader) {
+  // 替换 CSP 中的域名
+  const newCspHeader = cspHeader
+    .replace(/copilot\.microsoft\.com/g, porxyHostName)
+    .replace(/studiostaticassetsprod\.azureedge\.net/g, porxyHostName);
+
+  // 添加对本机的支持，并允许相对路径
+  const updatedCspHeader = newCspHeader
+    .replace(/script-src ([^;]+)/, `script-src $1 'self' 'unsafe-inline' 'unsafe-eval'`)
+    .replace(/connect-src ([^;]+)/, `connect-src $1 'self'`)
+    .replace(/frame-src ([^;]+)/, `frame-src $1 'self'`)
+    .replace(/img-src ([^;]+)/, `img-src $1 'self' data:`);
+
+  resHeaders.set("Content-Security-Policy", updatedCspHeader);
+}
+        
         config.body = retBody;
         return config;
       },
