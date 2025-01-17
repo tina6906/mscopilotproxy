@@ -160,7 +160,7 @@ async function handleRequest(request, env, ctx) {
  // 设置 CSP 头部，允许本机 JavaScript 执行
   const cspHeader = `
     base-uri 'self';
-    script-src 'strict-dynamic' https://www.clarity.ms https://copilot.microsoft.com https://picassostaticassetsstg.azureedge.net/ https://challenges.cloudflare.com/ 'self' 'nonce-${nonce}' 'unsafe-inline';
+    script-src 'strict-dynamic' https://www.clarity.ms https://copilot.microsoft.com https://picassostaticassetsstg.azureedge.net/ https://challenges.cloudflare.com/ 'self'  'unsafe-inline';
     require-trusted-types-for 'script';
     trusted-types default copilotPolicy dompurify @centro/hvc-loader;
     frame-ancestors 'self' https://edgeservices.bing.com edge://* teams.microsoft.com teams.live.com local.teams.office.com local.teams.live.com *.microsoft365.com *.office.com m365.cloud.microsoft copilot.cloud.microsoft ccm.mobile.m365.svc.cloud.microsoft copilot.cloud-dev.microsoft https://travel-dev.aexp.com/ https://travel-qa.aexp.com https://travel.aexp.com https://travelpreflight-dev.aexp.com https://travelpreflight-qa.aexp.com https://travelpreflight.aexp.com;
