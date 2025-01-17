@@ -124,7 +124,7 @@ async function handleRequest(request, env,ctx) {
         const resUrl = new URL(res.url);  
         retBody = retBody.replace(/copilot\.microsoft\.com(:[0-9]{1,6})?/g, `${porxyHostName}`);
         retBody = retBody.replace(/https?:\/\/studiostaticassetsprod\.azureedge\.net(:[0-9]{1,6})?/g, `${porxyOrigin}`);
-        // 添加新的替换动作
+        // 添加验证替换动作
          retBody = retBody.replace(/https?:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js/g, '/apijs/api.js');
         
         if (resUrl.pathname == "/") {
