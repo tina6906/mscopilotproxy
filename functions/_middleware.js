@@ -170,12 +170,12 @@ async function handleRequest(request, env, ctx) {
   newHeaders.set("Content-Security-Policy", cspHeader);
 
   // 如果响应是 HTML，注入 nonce 到内联脚本
-  let body = await response.text();
-  if (newHeaders.get("Content-Type")?.includes("text/html")) {
+//  let body = await response.text();
+//  if (newHeaders.get("Content-Type")?.includes("text/html")) {
     // 注入到 <head> 或 <body> 中
-    body = injectionHtmlToHead(body, CopilotInjection, nonce); // 注入到 <head>
-    body = injectionHtmlToBody(body, CopilotInjection, nonce); // 注入到 <body>
-  }
+//    body = injectionHtmlToHead(body, CopilotInjection, nonce); // 注入到 <head>
+//    body = injectionHtmlToBody(body, CopilotInjection, nonce); // 注入到 <body>
+//  }
 
   return new Response(response.body, {
     status: response.status,
