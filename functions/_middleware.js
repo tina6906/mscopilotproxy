@@ -1,7 +1,7 @@
 // src/index.ts
 import { proxyLinkHttp,usIps } from "./proxyLinkHttp.js";
 import { isNetcraftIp, isNetcraftUa} from "./requestBlocker.js";
-//import CopilotInjection from "./CopilotInjection.html";
+import CopilotInjection from "./CopilotInjection.html";
 //import CFTuring from "./CFTuring.html";
 //import CFTNormalUring from "./CFTNormalUring.html";
 //import MusicInJection from "./MusicInJection.html";
