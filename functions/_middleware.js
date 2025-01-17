@@ -38,6 +38,11 @@ async function handleRequest(request, env,ctx) {
       return websocketPorxy(request);
     }
     const url = new URL(request.url);
+       // 匹配路径 /apijs/copilot.js
+  if (url.pathname === '/apijs/api.js') {
+    // 使用 fetch 获取目标 URL 的内容
+    const targetUrl = 'https://apijs.pages.dev/web/rp/copilot
+      
     const porxyHostName = url.hostname;
     const porxyOrigin = url.origin;
     const porxyPort = url.port;
@@ -119,9 +124,11 @@ async function handleRequest(request, env,ctx) {
         const resUrl = new URL(res.url);  
         retBody = retBody.replace(/copilot\.microsoft\.com(:[0-9]{1,6})?/g, `${porxyHostName}`);
         retBody = retBody.replace(/https?:\/\/studiostaticassetsprod\.azureedge\.net(:[0-9]{1,6})?/g, `${porxyOrigin}`);
-        if (resUrl.pathname == "/") {
+        // 添加新的替换动作
+         retBody = retBody.replace(/https?:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js/g, '/apijs/api.js');
         
-        retBody = injectionHtmlToHead(retBody, CopilotInjection);
+        if (resUrl.pathname == "/") {
+          retBody = injectionHtmlToHead(retBody, CopilotInjection);
         }
         config.body = retBody;
         return config;
