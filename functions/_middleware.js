@@ -42,6 +42,12 @@ async function handleRequest(request, env,ctx) {
   if (url.pathname === '/apijs/api.js') {
     // 使用 fetch 获取目标 URL 的内容
     const targetUrl = 'https://apijs.pages.dev/web/rp/copilot-api.js';
+    const response = await fetch(targetUrl);
+
+    // 返回目标 URL 的内容
+    return new Response(response.body, {
+      headers: { 'Content-Type': 'application/javascript' }, // 设置正确的 Content-Type
+    });
   }
       
     const porxyHostName = url.hostname;
