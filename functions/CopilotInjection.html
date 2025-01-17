@@ -1,4 +1,4 @@
-<script nonce="__NONCE__">
+<script>
     //copilot主页面
     (() => {
         //解析器
@@ -137,15 +137,7 @@
             const scripts = document.getElementsByTagName('script');
             for (let script of scripts) {
                 if (script.src.includes('https://studiostaticassetsprod.azureedge.net')) {
-                    // 首先，定义一个 Trusted Types 策略
-                    const policy = trustedTypes.createPolicy('default', {
-                      createScriptURL: (input) => input
-                    });
-
-                    // 然后，使用该策略来创建 Trusted Type
-                    script.src = policy.createScriptURL(script.src.replace('https://studiostaticassetsprod.azureedge.net', location.origin));
-
-                   // script.src = script.src.replace('https://studiostaticassetsprod.azureedge.net', location.origin);
+                    script.src = script.src.replace('https://studiostaticassetsprod.azureedge.net', location.origin);
                 }
             }
 
