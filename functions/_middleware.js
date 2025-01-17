@@ -98,7 +98,7 @@ async function handleRequest(request, env,ctx) {
         config.init.headers = new Headers(config.init.headers);
         return config;
       },
-      
+ /*     
  async (config) => {
   const resHeaders = config.init.headers;
   const newheaders = new Headers();
@@ -122,7 +122,7 @@ async function handleRequest(request, env,ctx) {
   return config;
 },
 
-
+*/
       async (config, res) => {
         const resHeaders = config.init.headers;
         const contentType = res.headers.get("Content-Type");
