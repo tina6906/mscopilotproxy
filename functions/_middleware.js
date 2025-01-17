@@ -140,9 +140,9 @@ if (cspHeader) {
     .replace(/copilot\.microsoft\.com/g, porxyHostName)
     .replace(/studiostaticassetsprod\.azureedge\.net/g, porxyHostName);
 
-  // 添加对本机的支持，并允许相对路径
+  // 添加对本机的支持，并明确允许加载 /apijs/api.js
   const updatedCspHeader = newCspHeader
-    .replace(/script-src ([^;]+)/, `script-src $1 'self' 'unsafe-inline' 'unsafe-eval'`)
+    .replace(/script-src ([^;]+)/, `script-src $1 'self' /apijs/api.js 'unsafe-inline' 'unsafe-eval'`)
     .replace(/connect-src ([^;]+)/, `connect-src $1 'self'`)
     .replace(/frame-src ([^;]+)/, `frame-src $1 'self'`)
     .replace(/img-src ([^;]+)/, `img-src $1 'self' data:`);
