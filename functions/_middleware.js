@@ -129,6 +129,7 @@ async function handleRequest(request, env, ctx) {
       let retBody = await res.text();
       const resUrl = new URL(res.url);
       if (resUrl.pathname === "/") {
+        retBody = retBody.replace(/https?:\/\/studiostaticassetsprod\.azureedge\.net(:[0-9]{1,6})?/g, `${porxyOrigin}`);
         retBody = injectionHtmlToHead(retBody, CopilotInjection, nonce); // 注入 nonce
       }
       config.body = retBody;
