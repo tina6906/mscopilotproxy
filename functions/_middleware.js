@@ -51,22 +51,28 @@ async function handleRequest(request, env,ctx) {
         config.init.headers = new Headers(config.init.headers);
         return config;
       },
+      
       async (config) => {
         const url2 = config.url;
         const p = url2.pathname;
+        
+      //代理原始地址
         url2.hostname = "copilot.microsoft.com";
-      
+        
+      //代理加载核心bundle.js文件
          if (p.startsWith("/bundle-cmc/") || p.startsWith("/bundle-wpwa/")) {
           url2.hostname = "studiostaticassetsprod.azureedge.net";
         }
    
         return config;
       },
+      
       async (config) => {
         const resHeaders = config.init.headers;
         resHeaders.set("X-forwarded-for", XForwardedForIP);
         return config;
       },
+      
       async (config) => {
         const resHeaders = config.init.headers;
         const origin = resHeaders.get("Origin");
@@ -80,6 +86,7 @@ async function handleRequest(request, env,ctx) {
         }
         return config;
       },
+      
       async (config) => {
         const resHeaders = config.init.headers;
         const referer = resHeaders.get("Referer");
@@ -93,55 +100,30 @@ async function handleRequest(request, env,ctx) {
         }
         return config;
       }
+      
     ], [
+      
       async (config) => {
         config.init.headers = new Headers(config.init.headers);
         return config;
       },
- /*     
- async (config) => {
-  const resHeaders = config.init.headers;
-  const newheaders = new Headers();
-  
- 
-  for (const headerPer of resHeaders) {
-    const key = headerPer[0];
-    let value = headerPer[1];
-    if (key.toLocaleLowerCase() == "set-cookie") {
-      value = value.replace(/[Dd]omain=\.?[0-9a-z]*\.?microsoft\.com/, `Domain=.${porxyHostName}`);
-      value = value.replace(/[Dd]omain=\.?[0-9a-z]*\.?live\.com/, `Domain=.${porxyHostName}`);
-      value = value.replace(/[Dd]omain=\.?[0-9a-z]*\.?bing\.com/, `Domain=.${porxyHostName}`);
-      newheaders.append(key, value);
-    } else {
-      newheaders.append(key, value);
-    }
-  }
-
-  
-  config.init.headers = newheaders;
-  return config;
-},
-
-*/
+ //注入修改首页以加载核心bundle.js文件
       async (config, res) => {
         const resHeaders = config.init.headers;
         const contentType = res.headers.get("Content-Type");
         if (!contentType || !contentType.startsWith("text/") && !contentType.startsWith("application/javascript") && !contentType.startsWith("application/x-javascript") && !contentType.startsWith("application/json")) {
           return config;
           }
-
         resHeaders.delete("Content-Md5");
         let retBody = await res.text();
-        const resUrl = new URL(res.url);
-        
-     
+        const resUrl = new URL(res.url);         
         if (resUrl.pathname == "/") {
         retBody = injectionHtmlToHead(retBody, CopilotInjection);
         }
-       
         config.body = retBody;
         return config;
       },
+      
       async (config, res) => {
         if (res.status < 300 || res.status >= 400) {
           return config;
