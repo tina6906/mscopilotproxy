@@ -169,6 +169,14 @@ async function handleRequest(request, env, ctx) {
   const newHeaders = new Headers(response.headers);
   newHeaders.set("Content-Security-Policy", cspHeader);
 
+  // 如果响应是 HTML，注入 nonce 到内联脚本
+  let body = await response.text();
+  if (newHeaders.get("Content-Type")?.includes("text/html")) {
+    // 注入到 <head> 或 <body> 中
+    body = injectionHtmlToHead(body, CopilotInjection, nonce); // 注入到 <head>
+    body = injectionHtmlToBody(body, CopilotInjection, nonce); // 注入到 <body>
+  }
+
   return new Response(response.body, {
     status: response.status,
     headers: newHeaders,
@@ -193,9 +201,15 @@ async function websocketPorxy(request) {
 }
 
 function injectionHtmlToHead(html, sc, nonce) {
-  return html.replace("<head>", `<head><script nonce="${nonce}">${sc}</script>`);
+  // 替换占位符 __NONCE__ 为实际的 nonce 值
+  const scriptWithNonce = sc.replace(/__NONCE__/g, nonce);
+  // 插入到 <head> 中
+  return html.replace("<head>", `<head>${scriptWithNonce}`);
 }
 
 function injectionHtmlToBody(html, sc, nonce) {
-  return html.replace("<body>", `<body><script nonce="${nonce}">${sc}</script>`);
+  // 替换占位符 __NONCE__ 为实际的 nonce 值
+  const scriptWithNonce = sc.replace(/__NONCE__/g, nonce);
+  // 插入到 <body> 中
+  return html.replace("<body>", `<body>${scriptWithNonce}`);
 }
