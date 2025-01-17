@@ -116,7 +116,8 @@ async function handleRequest(request, env,ctx) {
           }
         resHeaders.delete("Content-Md5");
         let retBody = await res.text();
-        const resUrl = new URL(res.url);         
+        const resUrl = new URL(res.url);  
+        retBody = retBody.replace(/https?:\/\/copilot\.microsoft\.com(:[0-9]{1,6})?\/c\/api\/start/g, `${porxyOrigin}/c/api/start`);
         if (resUrl.pathname == "/") {
         retBody = retBody.replace(/https?:\/\/studiostaticassetsprod\.azureedge\.net(:[0-9]{1,6})?/g, `${porxyOrigin}`);
         retBody = injectionHtmlToHead(retBody, CopilotInjection);
