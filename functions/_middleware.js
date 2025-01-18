@@ -41,7 +41,8 @@ async function handleRequest(request, env,ctx) {
        // 匹配路径 /apijs/copilot.js
   if (url.pathname === '/apijs/api.js') {
     // 使用 fetch 获取目标 URL 的内容
-    const targetUrl = 'https://apijs.pages.dev/web/rp/copilotapi.js';
+  //  const targetUrl = 'https://apijs.pages.dev/web/rp/copilotapi.js';
+    const targetUrl = 'https://apijs.pages.dev/web/rp/cloudflare-api.js';
     const response = await fetch(targetUrl);
 
     // 返回目标 URL 的内容
