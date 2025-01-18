@@ -42,8 +42,8 @@ async function handleRequest(request, env,ctx) {
   if (url.pathname === '/apijs/api.js') {
     // 使用 fetch 获取目标 URL 的内容
   //  const targetUrl = 'https://apijs.pages.dev/web/rp/copilotapi.js';
-  //  const targetUrl = 'https://apijs.pages.dev/web/rp/cloudflare-api.js';
-    const targetUrl = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    const targetUrl = 'https://apijs.pages.dev/web/rp/cloudflare-api.js';
+  //  const targetUrl = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
     const response = await fetch(targetUrl);
 
     // 返回目标 URL 的内容
