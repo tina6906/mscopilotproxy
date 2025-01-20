@@ -139,14 +139,14 @@ async function handleRequest(request, env,ctx) {
         if (resUrl.pathname == "/") {
           retBody = injectionHtmlToHead(retBody, CopilotInjection);
         }
-
+/*
         // 修改 CSP 头部
       const cspHeader = resHeaders.get("Content-Security-Policy");
       if (cspHeader) {
         // 删除 CSP 头部
         resHeaders.delete("Content-Security-Policy");
       }
-        
+  */      
         config.body = retBody;
         return config;
       },
