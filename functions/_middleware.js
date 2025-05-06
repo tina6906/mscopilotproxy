@@ -113,6 +113,24 @@ async function handleRequest(request, env,ctx) {
           resHeaders.set("Referer", refererUrl.toString());
         }
         return config;
+      };
+
+    async (config) => {
+        const url2 = config.url;
+        if (url2.searchParams.has("cprt")) {
+          url2.hostname = url2.searchParams.get("cprt");
+          url2.searchParams.delete("cprt");
+          return config;
+        }
+        if (url2.searchParams.has("cprtp")) {
+          url2.port = url2.searchParams.get("cprtp");
+          url2.searchParams.delete("cprtp");
+        }
+        if (url2.searchParams.has("cprtl")) {
+          url2.protocol = url2.searchParams.get("cprtl");
+          url2.searchParams.delete("cprtl");
+        }
+        return config;
       }
       
     ], [
