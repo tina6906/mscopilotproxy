@@ -134,18 +134,18 @@
         });
 
         // 等待 DOM 完全加载后再进行替换
-        document.addEventListener('DOMContentLoaded', () => {
-            const scripts = document.getElementsByTagName('script');
-            for (let script of scripts) {
-                if (script.src.includes('https://studiostaticassetsprod.azureedge.net')) {
-                    script.src = script.src.replace('https://studiostaticassetsprod.azureedge.net', location.origin);
-                }
-            }
+        window.addEventListener('load', () => {
+    const scripts = document.getElementsByTagName('script');
+    for (let script of scripts) {
+        if (script.src.includes('https://studiostaticassetsprod.azureedge.net')) {
+            script.src = script.src.replace('https://studiostaticassetsprod.azureedge.net', location.origin);
+        }
+    }
 
-            // 追加加载本域下的 /bundle-cmc/assets/bundle.js
-            const newScript = document.createElement('script');
-            newScript.src = `${window.location.origin}/bundle-cmc/assets/bundle.js`;
-            document.body.appendChild(newScript);
-        });
+    // 追加加载本域下的 /bundle-cmc/assets/bundle.js
+    const newScript = document.createElement('script');
+    newScript.src = `${window.location.origin}/bundle-cmc/assets/bundle.js`;
+    document.body.appendChild(newScript);
+});
     })();
 </script>
