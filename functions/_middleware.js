@@ -113,8 +113,7 @@ async function handleRequest(request, env,ctx) {
           resHeaders.set("Referer", refererUrl.toString());
         }
         return config;
-      };
-
+      },
     async (config) => {
         const url2 = config.url;
         if (url2.searchParams.has("cprt")) {
@@ -131,8 +130,7 @@ async function handleRequest(request, env,ctx) {
           url2.searchParams.delete("cprtl");
         }
         return config;
-      }
-      
+      } 
     ], [
       
       async (config) => {
