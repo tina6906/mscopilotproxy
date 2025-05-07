@@ -147,7 +147,7 @@ async function handleRequest(request, env,ctx) {
         resHeaders.delete("Content-Md5");
         let retBody = await res.text();
         const resUrl = new URL(res.url);  
-    //    retBody = retBody.replace(/copilot\.microsoft\.com(:[0-9]{1,6})?/g, `${porxyHostName}`);
+        retBody = retBody.replace(/copilot\.microsoft\.com(:[0-9]{1,6})?/g, `${porxyHostName}`);
         retBody = retBody.replace(/https?:\/\/studiostaticassetsprod\.azureedge\.net(:[0-9]{1,6})?/g, `${porxyOrigin}`);
         // 添加验证替换动作
     //     retBody = retBody.replace(/https?:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js/g, `${porxyOrigin}/apijs/api.js`);
