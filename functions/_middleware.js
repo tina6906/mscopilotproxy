@@ -137,6 +137,29 @@ async function handleRequest(request, env,ctx) {
         config.init.headers = new Headers(config.init.headers);
         return config;
       },
+
+      // 新增全局CORS头部设置（响应处理阶段）
+  async (config, res) => {
+    const headers = new Headers(config.init.headers);
+    // 设置CORS全局许可
+    headers.set("Access-Control-Allow-Origin", "*");
+    headers.set("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH");
+    headers.set("Access-Control-Allow-Headers", "*");
+    headers.set("Access-Control-Expose-Headers", "*");
+    headers.set("Access-Control-Max-Age", "86400");
+  /*  
+    // 如果是OPTIONS预检请求直接返回
+    if (config.init.method === "OPTIONS") {
+      return new Response(null, { 
+        status: 204,
+        headers: headers
+      });
+    }
+    */
+    config.init.headers = headers;
+    return config;
+  },
+      
  //注入修改首页以加载核心bundle.js文件
       async (config, res) => {
         const resHeaders = config.init.headers;
